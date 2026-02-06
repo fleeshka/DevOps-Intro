@@ -5,3 +5,5 @@
  create mode 100644 labs/submission1.md
 3. Commit signing is important in DevOps workflows because it cryptographically verifies the identity of the author, ensuring the integrity and authenticity of code changes. This creates a trusted audit trail and is often required for security compliance and secure deployments.
 4. https://github.com/fleeshka/DevOps-Intro/commit/f2ef5b1daca3b8f106c8663865a702291915d550 "This commit was signed with the committer's verified signature. fleeshka SSH Key Fingerprint: epWa0oYt9UaQ5sHNWrIdXl0Vvaz6tQMrpp2dhwg7KUQ Verified on Feb 6, 2026, 05:38 PM"
+
+1. tbu
