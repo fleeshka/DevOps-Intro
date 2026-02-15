@@ -1,4 +1,4 @@
-1.2:
+# 1.2:
 
 1. All command outputs for object inspection.: 
 - commit
@@ -62,7 +62,7 @@ gpgsig -----BEGIN SSH SIGNATURE-----
 Add test file
 ```
 
-2.2:
+# 2.2:
 
 1.
 ```
@@ -154,4 +154,130 @@ git reflog
 
 4. The recovery worked because git reflog records every movement of HEAD, including resets that rewrite branch history, even when commits become unreachable from the current branch tip. After the --soft and --hard resets moved the branch from the Third commit to the First commit, the Third commit (85b268c) was no longer visible in normal git log, but it still appeared in the reflog as HEAD@{2}. By identifying that hash in the reflog and running git reset --hard 85b268c, the branch pointer, index, and working tree were all restored to the exact state of the lost commit, effectively undoing the destructive reset.
 
-3.0:
+# 3:
+
+1, 2.
+```
+git log --oneline --graph --all
+* 54279f3 (side-branch) Side branch commit
+* 85b268c (HEAD -> git-reset-practice) Third commit
+* 492e2b3 Second commit
+* 3ab8bfa First commit
+* 08d3851 (main) Add test file
+*   9a01abc (origin/main, origin/HEAD) Merge pull request #1 from fleeshka/feature/lab1
+|\  
+| | * 4b587d9 (origin/feature/lab1) docs: update submission, finalize
+| | * add170f docs: add lab1 submission stub
+| |/  
+| * 47dfc6f docs: add lab1 submission stub
+|/  
+* 9a18fea docs: add commit signing summary
+* f2ef5b1 docs: add commit signing summary
+* d6b6a03 Update lab2
+* 87810a0 feat: remove old Exam Exemption Policy
+* 1e1c32b feat: update structure
+* 6c27ee7 feat: publish lecs 9 & 10
+* 1826c36 feat: update lab7
+* 3049f08 feat: publish lec8
+* da8f635 feat: introduce all labs and revised structure
+* 04b174e feat: publish lab and lec #5
+* 67f12f1 feat: publish labs 4&5, revise others
+* 82d1989 feat: publish lab3 and lec3
+* 3f80c83 feat: publish lec2
+* 499f2ba feat: publish lab2
+* af0da89 feat: update lab1
+* 74a8c27 Publish lab1
+* f0485c0 Publish lec1
+* 31dd11b Publish README.md
+```
+
+3. Graph view makes the commit structure visually explicit, clearly showing where branches diverge, merge, and how git-reset-practice, side-branch, and main relate to each other. Seeing history as a graph rather than a linear list makes it much easier to understand how resets move branch pointers and how commits remain in the repository even when they are no longer at the tip of a branch.
+
+# 4:
+
+1. 
+```
+git tag v1.0.0
+
+git push origin v1.0.0
+Enumerating objects: 13, done.
+Counting objects: 100% (13/13), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (12/12), 1.38 KiB | 706.00 KiB/s, done.
+Total 12 (delta 7), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (7/7), completed with 1 local object.
+To github.com:fleeshka/DevOps-Intro.git
+ * [new tag]         v1.0.0 -> v1.0.0
+
+echo "temp" >> file.txt && git add file.txt && git commit -m "for v1.1.0"
+[git-reset-practice 697f986] for v1.1.0
+ 1 file changed, 1 insertion(+)
+
+git tag v1.1.0
+
+git push origin v1.1.0
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 524 bytes | 524.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To github.com:fleeshka/DevOps-Intro.git
+ * [new tag]         v1.1.0 -> v1.1.0
+```
+2.
+85b268c0b137b8b066cf747d045311e1b3db049d
+697f986e8bf3203e50b0f0a2208494dab41e800f
+
+3.
+Git tags are essential for marking specific points in your repository's history as important releases, enabling clear versioning that makes it easy to identify and rollback to stable versions. In CI/CD pipelines, tags often trigger automated deployment processes, and they serve as anchor points for generating release notes by comparing changes between tagged versions.
+
+# 5:
+
+1. 
+```
+git switch -c cmd-compare
+Switched to a new branch 'cmd-compare'
+
+git switch -
+Switched to branch 'git-reset-practice'
+
+echo "scratch" >> demo.txt
+git add demo.txt
+git restore demo.txt
+git restore --staged demo.txt
+```
+
+2.
+```
+git status
+On branch git-reset-practice
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	**Deliverable:**
+	demo.txt
+	labs/submission2.md
+	witch -c cmd-compare
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+git branch
+  cmd-compare
+* git-reset-practice
+  main
+  side-branch
+```
+
+3. 
+- git restore demo.txt is used when you want to permanently discard all uncommitted changes in your working directory and revert the file back to its last committed state.
+- git restore --staged demo.txt is used when you want to remove a file from the staging area while preserving all your local changes in the working directory.
+- git restore --source=HEAD~1 demo.txt is used when you need to revert a file to exactly how it appeared in a previous commit, whether to undo unwanted changes or recover a deleted file.
+
+# 6:
+
+all done
+
+# GitHub Community
+Starring repositories matters in open source because it serves as both a personal bookmarking system for interesting projects and a public signal of appreciation that helps projects gain visibility, attract contributors, and build community trust through higher star counts. Following developers is essential in team projects and professional growth as it enables you to learn from experienced developers' code, discover new tools and trends, build valuable professional connections, and demonstrate your engagement with the developer community to potential employers.
